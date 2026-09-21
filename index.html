@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Word Counter</title>
+</head>
+<body>
+  <h1>Word Counter</h1>
+
+  <textarea id="text" rows="10" cols="40"
+    placeholder="Type or paste your text here..."></textarea>
+
+  <p>Words: <span id="words">0</span></p>
+  <p>Characters: <span id="characters">0</span></p>
+
+  <script>
+    const text = document.getElementById("text");
+
+    text.addEventListener("input", function () {
+      const value = text.value.trim();
+
+      const words = value === "" ? 0 : value.split(/\s+/).length;
+      const characters = text.value.length;
+
+      document.getElementById("words").textContent = words;
+      document.getElementById("characters").textContent = characters;
+    });
+  </script>
+</body>
+</html>
