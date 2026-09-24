@@ -1,158 +1,226 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Free Word Counter</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f4f7fb;
-  color: #222;
-}
+  <title>Free Word Counter - Count Words & Characters</title>
 
-.container {
-  max-width: 700px;
-  margin: 50px auto;
-  padding: 25px;
-}
+  <meta name="description" content="Free online word counter and character counter. Quickly count words and characters in your text. Simple, fast and easy to use.">
 
-.box {
-  background: white;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-}
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-h1 {
-  text-align: center;
-  margin-bottom: 10px;
-}
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
 
-.subtitle {
-  text-align: center;
-  color: #666;
-  margin-bottom: 25px;
-}
+    header {
+      background: #1f4f8f;
+      color: white;
+      text-align: center;
+      padding: 30px 15px;
+    }
 
-textarea {
-  width: 100%;
-  height: 250px;
-  padding: 15px;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  font-size: 16px;
-  resize: vertical;
-}
+    header h1 {
+      margin: 0 0 10px;
+      font-size: 32px;
+    }
 
-.stats {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
-  text-align: center;
-}
+    header p {
+      margin: 0;
+      font-size: 16px;
+    }
 
-.stat {
-  font-size: 18px;
-}
+    .container {
+      max-width: 850px;
+      margin: 30px auto;
+      padding: 0 15px;
+    }
 
-.number {
-  display: block;
-  font-size: 28px;
-  font-weight: bold;
-}
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    }
 
-button {
-  display: block;
-  margin: 25px auto 0;
-  padding: 12px 25px;
-  border: none;
-  border-radius: 8px;
-  background: #222;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-}
+    textarea {
+      width: 100%;
+      min-height: 280px;
+      padding: 15px;
+      font-size: 17px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      resize: vertical;
+      outline: none;
+    }
 
-button:hover {
-  opacity: 0.85;
-}
+    textarea:focus {
+      border-color: #1f4f8f;
+    }
 
-@media (max-width: 600px) {
-  .container {
-    margin: 20px auto;
-    padding: 15px;
-  }
+    .stats {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
 
-  .box {
-    padding: 20px;
-  }
+    .stat {
+      flex: 1;
+      min-width: 150px;
+      background: #f1f5fa;
+      padding: 18px;
+      text-align: center;
+      border-radius: 8px;
+    }
 
-  textarea {
-    height: 220px;
-  }
-}
-</style>
+    .stat strong {
+      display: block;
+      font-size: 28px;
+      margin-bottom: 5px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 7px;
+      background: #1f4f8f;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #173d70;
+    }
+
+    .info {
+      margin-top: 30px;
+      line-height: 1.7;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px 15px;
+      margin-top: 30px;
+      background: white;
+    }
+
+    footer a {
+      color: #1f4f8f;
+      text-decoration: none;
+      margin: 0 8px;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 26px;
+      }
+
+      .card {
+        padding: 18px;
+      }
+
+      textarea {
+        min-height: 230px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="container">
-  <div class="box">
+  <header>
+    <h1>Free Word Counter</h1>
+    <p>Count words and characters quickly and easily</p>
+  </header>
 
-    <h1>Word Counter</h1>
+  <div class="container">
 
-    <p class="subtitle">
-      Count words and characters instantly for free.
-    </p>
+    <div class="card">
 
-    <textarea id="text" placeholder="Type or paste your text here..."></textarea>
+      <textarea id="textInput" placeholder="Type or paste your text here..."></textarea>
 
-    <div class="stats">
-      <div class="stat">
-        <span class="number" id="words">0</span>
-        Words
+      <div class="stats">
+        <div class="stat">
+          <strong id="wordCount">0</strong>
+          Words
+        </div>
+
+        <div class="stat">
+          <strong id="charCount">0</strong>
+          Characters
+        </div>
       </div>
 
-      <div class="stat">
-        <span class="number" id="characters">0</span>
-        Characters
+      <button onclick="clearText()">Clear Text</button>
+
+      <div class="info">
+        <h2>Free Online Word Counter</h2>
+
+        <p>
+          Use our free word counter to quickly count the number of
+          words and characters in your text. This tool is useful for
+          students, writers, bloggers, teachers, and anyone who needs
+          to check text length.
+        </p>
+
+        <h2>How to Use</h2>
+
+        <p>
+          Simply type or paste your text into the box above. Your word
+          count and character count will update automatically.
+        </p>
       </div>
+
     </div>
 
-    <button onclick="clearText()">Clear Text</button>
-
   </div>
-</div>
 
-<script>
-const text = document.getElementById("text");
+  <footer>
+    <a href="about.html">About</a>
+    |
+    <a href="contact.html">Contact</a>
+    |
+    <a href="privacy.html">Privacy Policy</a>
 
-text.addEventListener("input", function() {
-  const value = text.value.trim();
+    <p>© 2026 Free Word Counter. All rights reserved.</p>
+  </footer>
 
-  const words = value === "" ? 0 : value.split(/\s+/).length;
-  const characters = text.value.length;
+  <script>
+    const textInput = document.getElementById("textInput");
+    const wordCount = document.getElementById("wordCount");
+    const charCount = document.getElementById("charCount");
 
-  document.getElementById("words").textContent = words;
-  document.getElementById("characters").textContent = characters;
-});
+    textInput.addEventListener("input", function () {
+      const text = textInput.value;
 
-function clearText() {
-  text.value = "";
-  document.getElementById("words").textContent = "0";
-  document.getElementById("characters").textContent = "0";
-}
-</script>
-<div style="text-align:center; margin-top:30px;">
-  <a href="about.html">About</a> |
-  <a href="contact.html">Contact</a> |
-  <a href="privacy.html">Privacy Policy</a>
-</div>
+      const words = text.trim() === ""
+        ? 0
+        : text.trim().split(/\s+/).length;
+
+      wordCount.textContent = words;
+      charCount.textContent = text.length;
+    });
+
+    function clearText() {
+      textInput.value = "";
+      wordCount.textContent = "0";
+      charCount.textContent = "0";
+    }
+  </script>
 
 </body>
 </html>
